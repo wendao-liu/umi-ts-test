@@ -1,64 +1,30 @@
-import React, { useEffect, useRef, useState } from 'react';
-import Animate from './animate/index';
+import React, {
+  Component,
+  createContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
+import Toolbar from './Toolbar';
 import styles from './index.less';
+import { ThemeContext, AnimalsContext } from '@/pages/context';
 
-const Home = () => {
-  const [mode] = useState('white');
-  const [flag, setFlag] = useState('up');
-  const [homoeBasicInfoList, setHomoeBasicInfoList] = useState([
-    {
-      oneDayTotalSum: 10,
-      thirtyDayAvgSum: 20,
-    },
-    {
-      oneDayTotalSum: 30,
-      thirtyDayAvgSum: 10,
-    },
-  ]);
+interface P {}
+interface S {}
 
-  const countClick = () => {
-    console.log('====================================');
-    console.log('点击count');
-    console.log('====================================');
-  };
-
-  const btnClick = () => {
-    flag === 'up'
-      ? setHomoeBasicInfoList([
-          {
-            oneDayTotalSum: 10,
-            thirtyDayAvgSum: 20,
-          },
-          {
-            oneDayTotalSum: 30,
-            thirtyDayAvgSum: 10,
-          },
-        ])
-      : setHomoeBasicInfoList([
-          {
-            oneDayTotalSum: 10,
-            thirtyDayAvgSum: 20,
-          },
-          {
-            oneDayTotalSum: 5,
-            thirtyDayAvgSum: 20,
-          },
-        ]);
-    setFlag(flag === 'up' ? 'down' : 'up');
-  };
-  return (
-    <div className={styles.parent}>
-      <Animate
-        homoeBasicInfoList={homoeBasicInfoList}
-        mode={mode}
-        countClick={countClick}
-      />
-
-      <div className={styles.btn} onClick={btnClick}>
-        按钮
-      </div>
-    </div>
-  );
-};
+class Home extends Component<P, S> {
+  static getDerivedStateFromError(err) {
+    console.log(err,'err');
+  }
+  render() {
+    return (
+      <ThemeContext.Provider value="light">
+        <AnimalsContext.Provider value="cat">
+          <Toolbar />
+        </AnimalsContext.Provider>
+      </ThemeContext.Provider>
+    );
+  }
+}
 
 export default Home;
