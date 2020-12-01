@@ -1,55 +1,63 @@
 import React, { useEffect, useRef, useState } from 'react';
-import styles from './animate.less';
-import { autoPlay, elementTop, flagText } from '@/util';
-import ReactDOM from 'react-dom';
+import Animate from './animate/index';
+import styles from './index.less';
 
 const Home = () => {
-  const scrollRef = useRef(null);
-  const [flag, setFlag] = useState(null);
-  const [oldFlag] = useState('down');
+  const [mode] = useState('white');
+  const [flag, setFlag] = useState('up');
+  const [homoeBasicInfoList, setHomoeBasicInfoList] = useState([
+    {
+      oneDayTotalSum: 10,
+      thirtyDayAvgSum: 20,
+    },
+    {
+      oneDayTotalSum: 30,
+      thirtyDayAvgSum: 10,
+    },
+  ]);
 
-  useEffect(() => {
-    if (scrollRef?.current && flag) {
-      let scrollDom = [<div />];
-      if (flag === 'up') {
-        scrollRef.current.style.top = 0;
-        scrollDom = [
-          <div className={styles.scrollChild}>{flagText(oldFlag)}</div>,
-          <div className={styles.scrollChild}>上升</div>,
-        ];
-      } else if (flag === 'down') {
-        scrollRef.current.style.top = `-50px`;
-        scrollDom = [
-          <div className={styles.scrollChild}>下降</div>,
-          <div className={styles.scrollChild}>{flagText(oldFlag)}</div>,
-        ];
-      }
-      ReactDOM.render([...scrollDom], scrollRef.current);
-      if (flag) {
-        autoPlay({
-          current: scrollRef.current,
-          time: 10,
-          endCount: flag === 'up' ? -50 : 0,
-        });
-      }
-    }
-  }, [flag]);
+  const countClick = () => {
+    console.log('====================================');
+    console.log('点击count');
+    console.log('====================================');
+  };
 
+  const btnClick = () => {
+    flag === 'up'
+      ? setHomoeBasicInfoList([
+          {
+            oneDayTotalSum: 10,
+            thirtyDayAvgSum: 20,
+          },
+          {
+            oneDayTotalSum: 30,
+            thirtyDayAvgSum: 10,
+          },
+        ])
+      : setHomoeBasicInfoList([
+          {
+            oneDayTotalSum: 10,
+            thirtyDayAvgSum: 20,
+          },
+          {
+            oneDayTotalSum: 5,
+            thirtyDayAvgSum: 20,
+          },
+        ]);
+    setFlag(flag === 'up' ? 'down' : 'up');
+  };
   return (
-    <>
-      <div className={styles.scrollList}>
-        <div ref={scrollRef} className={styles.scrollView}>
-          <div className={styles.scrollChild}>0</div>,
-        </div>
-      </div>
-      <div
-        onClick={() => {
-          setFlag(flag === 'up' ? 'down' : 'up');
-        }}
-      >
+    <div className={styles.parent}>
+      <Animate
+        homoeBasicInfoList={homoeBasicInfoList}
+        mode={mode}
+        countClick={countClick}
+      />
+
+      <div className={styles.btn} onClick={btnClick}>
         按钮
       </div>
-    </>
+    </div>
   );
 };
 

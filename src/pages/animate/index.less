@@ -1,0 +1,59 @@
+// 滚动容器
+.scrollList {
+  width: 100%;
+  height: 46px;
+  position: relative;
+  overflow: hidden;
+}
+
+.scrollView {
+  width: 100%;
+  position: absolute;
+  top: 0;
+}
+
+.scrollChild {
+  height: 46px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+
+// 样式
+
+
+.whiteUpCount,
+.whiteDownCount,
+.darkUpCount,
+.darkDownCount {
+  height: 46px;
+  display: flex;
+  align-items: flex-end;
+  font-size: 36px;
+  line-height: 46px;
+  font-weight: 600;
+  font-family: PingFangSC-Regular;
+  width: 100%;
+  // color: #D93026; // 红色
+}
+
+.whiteUpCount {
+  color: #D93026;
+}
+
+.whiteDownCount {
+  color: #7A8BA3;
+}
+
+.darkUpCount {
+  color: #D93026;
+}
+
+.darkDownCount {
+  color: #8AE9E2;
+}
+
+.countFont {
+  font-size: 34px;
+}
