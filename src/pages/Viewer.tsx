@@ -48,36 +48,13 @@ const SomeComponent = React.lazy(() => {
 });
 
 function MyComponent() {
-  const ImgRef = useRef(null);
-
-  useEffect(() => {
-    var galley = document.getElementById('galley');
-    const viewer = new Viewer(galley, {
-      url: 'data-original',
-    });
-    return () => {
-      viewer.destroy();
-    };
-  }, []);
   return (
     <div>
-      <h1 className="animate__animated animate__bounce">An animated element</h1>
-      <div className="animate__animated animate__bounce animate__delay-2s">
-        Example
-      </div>
-      <div id="galley">
-        <ul className={`${styles.pictures} pictures`}>
-          <li>
-            <img data-original={img1} src={img1} alt="Tibetan Plateau" />
-          </li>
-          <li>
-            <img data-original={img2} src={img2} alt="Tibetan Plateau" />
-          </li>
-          <li>
-            <img data-original={img3} src={img3} alt="Tibetan Plateau" />
-          </li>
-        </ul>
-      </div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <section>
+          <SomeComponent />
+        </section>
+      </Suspense>
     </div>
   );
 }

@@ -8,7 +8,7 @@ import React, {
 import Toolbar from './Toolbar';
 import styles from './index.less';
 import { ThemeContext, AnimalsContext } from '@/pages/context';
-import HOC from './HOC';
+import Viewer from './Viewer';
 interface P {}
 interface S {}
 const ref = React.createRef();
@@ -41,7 +41,7 @@ class Home extends Component<P, S> {
   render() {
     return (
       <div>
-        <HOC ref={ref}/>
+        <Viewer />
       </div>
     );
   }
