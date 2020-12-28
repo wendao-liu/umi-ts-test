@@ -8,11 +8,10 @@ import React, {
 import Toolbar from './Toolbar';
 import styles from './index.less';
 import { ThemeContext, AnimalsContext } from '@/pages/context';
-import Viewer from './Viewer';
+import ScrollList from './ScrollList2';
 interface P {}
 interface S {}
 const ref = React.createRef();
-
 
 // Provider
 // class Home extends Component<P, S> {
@@ -31,17 +30,27 @@ const ref = React.createRef();
 // }
 
 class Home extends Component<P, S> {
+  state = {
+    slist: [1, 23, 4, 5, 5],
+  };
   static getDerivedStateFromError(err) {
     console.log(err, 'err');
   }
 
-  componentDidMount(){
-    console.log(ref,'ref');
+  componentDidMount() {
+    console.log(ref, 'ref');
+    setTimeout(() => {
+      this.setState({
+        slist: [...this.state.slist, 2, 2, 2],
+      });
+    }, 4000);
   }
+
   render() {
+    const { slist } = this.state;
     return (
       <div>
-        <Viewer />
+        <ScrollList list={slist} />
       </div>
     );
   }
