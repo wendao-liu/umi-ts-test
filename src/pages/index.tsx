@@ -8,7 +8,7 @@ import React, {
 import Toolbar from './Toolbar';
 import styles from './index.less';
 import { ThemeContext, AnimalsContext } from '@/pages/context';
-import ScrollList from './ScrollList2';
+import ScrollList from './ScrollList';
 interface P {}
 interface S {}
 const ref = React.createRef();
